@@ -3,9 +3,9 @@
 echo -e "analysis,h,CPUtime\n" > SNaQSummary.csv
 for logfile in log/*.log;
 do
-	Root="$(grep root $logfile | grep -o "\w*[0-9].*")"
-	Hmax="$(grep "hmax =" $logfile | grep -o '[0-9]')"
+	Root="$(grep root $logfile | grep -Po "\w+\d.*")"
+	Hmax="$(grep "hmax =" $logfile | grep -Po '\d+')"
 	outfile="out/"$Root".out"
-	Time="$(grep Elapsed "$outfile" | grep -o '[0-9]*\.[0-9]*')"
+	Time="$(grep Elapsed "$outfile" | grep -Po '\d+\.\d+')"
 	echo -e "$Root","$Hmax","$Time" >> SNaQSummary.csv
 done

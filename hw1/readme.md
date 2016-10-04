@@ -31,12 +31,12 @@ normalizefilenames.sh
 
 
 ```Unix Shell
-file="log/timetest$i" #define location of target files
-for i in {1..9}; #defines variable range
-do
-    mv log/timetest${i}_snaq.log log/timetest0${i}_snaq.log #change name and delete original file with mv 
-    mv out/timetest${i}_snaq.out out/timetest0${i}_snaq.out
-done
+    file="log/timetest$i" #define location of target files
+    for i in {1..9}; #defines variable range
+        do
+        mv log/timetest${i}_snaq.log log/timetest0${i}_snaq.log #change name and delete original file with mv 
+        mv out/timetest${i}_snaq.out out/timetest0${i}_snaq.out
+    done
 
 -----
 Purpose
@@ -83,15 +83,15 @@ Code
 
 summarizeSNaQfiles.sh
 ```Unix Shell
-echo -e "analysis,h,CPUtime\n" > SNaQSummary.csv #Push table header to .csv file
-for logfile in log/*.log;
-do
-    Root="$(grep root $logfile | grep -o "\w*[0-9].*")" #Define rootname as result of grep pipeline; grep -o for word with digits and special character 
-    Hmax="$(grep "hmax =" $logfile | grep -o '[0-9]')" #Define hmax as result of grep pipeline; grep -o for digits only
-    outfile="out/"$Root".out" #define *.out location from $Root variable
-    Time="$(grep Elapsed "$outfile" | grep -o '[0-9]*\.[0-9]*')" #Define hmax as result of grep pipeline; grep -o for digits and special character
-    echo -e "$Root","$Hmax","$Time" >> SNaQSummary.csv #Append rootname, hmax, elapsed time values to .csv file
-done
+    echo -e "analysis,h,CPUtime\n" > SNaQSummary.csv #Push table header to .csv file
+    for logfile in log/*.log;
+        do
+        Root="$(grep root $logfile | grep -o "\w+\d.+")" #Define rootname as result of grep pipeline; grep -o for word with digits and special character 
+        Hmax="$(grep "hmax =" $logfile | grep -o '\d+')" #Define hmax as result of grep pipeline; grep -o for digits only
+        outfile="out/"$Root".out" #define *.out location from $Root variable
+        Time="$(grep Elapsed "$outfile" | grep -o '[d+\.\d+')" #Define hmax as result of grep pipeline; grep -o for digits and special character
+        echo -e "$Root","$Hmax","$Time" >> SNaQSummary.csv #Append rootname, hmax, elapsed time values to .csv file
+    done
 
 ------
 Purpose

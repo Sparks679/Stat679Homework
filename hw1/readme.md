@@ -30,7 +30,7 @@ Code
 normalizefilenames.sh
 
 
-```Unix Shell
+```Bash
     file="log/timetest$i" #define location of target files
     for i in {1..9}; #defines variable range
         do
@@ -38,6 +38,7 @@ normalizefilenames.sh
         mv out/timetest${i}_snaq.out out/timetest0${i}_snaq.out
     done
 
+mv# moves file contents and deletes original
 -----
 Purpose
 -----
@@ -82,17 +83,23 @@ Code
 ---
 
 summarizeSNaQfiles.sh
-```Unix Shell
+```Bash
     echo -e "analysis,h,CPUtime\n" > SNaQSummary.csv #Push table header to .csv file
     for logfile in log/*.log;
         do
-        Root="$(grep root $logfile | grep -o "\w+\d.+")" #Define rootname as result of grep pipeline; grep -o for word with digits and special character 
-        Hmax="$(grep "hmax =" $logfile | grep -o '\d+')" #Define hmax as result of grep pipeline; grep -o for digits only
+        Root="$(grep root $logfile | grep -Po "\w+\d.+")" #Define rootname as result of grep pipeline; grep -o for word with digits and special character 
+        Hmax="$(grep "hmax =" $logfile | grep -Po '\d+')" #Define hmax as result of grep pipeline; grep -o for digits only
         outfile="out/"$Root".out" #define *.out location from $Root variable
-        Time="$(grep Elapsed "$outfile" | grep -o '[d+\.\d+')" #Define hmax as result of grep pipeline; grep -o for digits and special character
+        Time="$(grep Elapsed "$outfile" | grep -Po '[d+\.\d+')" #Define hmax as result of grep pipeline; grep -o for digits and special character
         echo -e "$Root","$Hmax","$Time" >> SNaQSummary.csv #Append rootname, hmax, elapsed time values to .csv file
     done
 
+#$Root= rootname of logfile
+#$Hmax= hmax value fro logfile
+#$outfile= location of *.out file
+#Time= CPUtime value from outfile
+#grep -P '\d+' = extended regex finding numbers with one or more digits
+#echo= print target
 ------
 Purpose
 ------

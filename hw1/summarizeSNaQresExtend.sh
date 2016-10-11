@@ -8,7 +8,7 @@ echo -e "analysis,h,CPUtime,Nruns,Nfail,fabs,frel,xtabs,xrel,seed,under3460,unde
 for logfile in log/*.log
 do
 	Root=$(basename -s .log $logfile) #Define rootname as variable $Root
-	Hmax=$(sed -rn 's/hmax = ([0-9])+./\1/p' $logfile) #Define hmax value as variable $Hmax
+	Hmax=$(sed -rn 's/hmax = ([0-9])+./\1/p' $logfile) #Isolate hmax value from logfile using sed; define hmax value as variable $Hmax
 	outfile=out/$Root.out #Define outfile location based on $Root
 	Time=$(sed -rn 's/Elapsed time: ([0-9]+\.[0-9]+) [a-z].+/\1/p' $outfile) #Define Elapsed time value as variable $Time
 	Nruns=$(sed -rn 's/.+ ([0-9]+) runs .+/\1/p' $logfile) #Define number of runs as variable $Nruns

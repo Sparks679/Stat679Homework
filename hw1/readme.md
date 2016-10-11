@@ -11,7 +11,7 @@ Storage of Shell Scripts used to complete *Homework 1* by *Sparks679*
 Prerequisites
 ------------
 
-/bin/bash
+* /bin/bash
 
 *.log files found at /home/sparks/coursedata/hw1-snaqTimeTests
 
@@ -47,36 +47,42 @@ Commands and Variables
 -----
 Purpose
 -----
+
 Change filenames to include leading zero
 
 ----------------
 Original Location
 ----------------
+
 /home/sparks/coursedata/hw1-snaqTimeTests
 
 ------
 Execute
 ------
+
 bash normalizefilenames.sh
 
 -----
 Authors
 -----
+
 K. William Sparks
 
 =========
 **Exercise 2**
 =========
+
 ------------
 Prerequisites
 ------------
 
-#!/bin/bash
+* /bin/bash
 
 * GNU Unix assumed
  * BSD users will have different arguements to enable extended regular expressions
 
-*.log files can be found at /home/sparks/coursework/hw1-snaqTimeTests/log/    
+*.log files can be found at /home/sparks/coursework/hw1-snaqTimeTests/log/
+    
 *.out files found in /home/sparks/coursework/hw1-snaqTimeTests/out/    
 
 
@@ -124,6 +130,7 @@ Find file rootname, hmax, and elapsed time values and display results as table i
 ----------------
 Original Location
 ----------------
+
 /home/sparks/coursedata/hw1-snaqTimeTests
 
 
@@ -136,6 +143,7 @@ bash summarizeSNaQres.sh
 ------
 Authors
 ------
+
 K. William Sparks
 
 
@@ -147,12 +155,13 @@ K. William Sparks
 Prerequisites
 ------------
 
-#!/bin/bash
+* /bin/bash
 
 * GNU Unix assumed
  * BSD users will have different arguements to enable extended regular expressions
 
 *.log files can be found at /home/sparks/coursework/hw1-snaqTimeTests/log/
+
 *.out files found in /home/sparks/coursework/hw1-snaqTimeTests/out/
 
 
@@ -234,6 +243,7 @@ Commands and Variables
 * sed -rn 's/pattern/replacement/p'= search for <pattern> and replace with <replacement>; print if match is found
  * -r enables the use of extended regex for GNU sed; -E for BSD sed
 * echo= print target
+
 ------
 Purpose
 ------
@@ -256,9 +266,11 @@ bash summarizeSNaQresExtend.sh
 ------
 Authors
 ------
+
 K. William Sparks
 
 --------
 Original Date Created
 -------
+
 2016-10-08

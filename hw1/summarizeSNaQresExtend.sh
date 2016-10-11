@@ -1,7 +1,7 @@
 #!/bin/bash
-#set -e # script terminates if any command exits with non-zero status
-#set -u # terminates if any variable is unset
-#set -o pipefail # terminates if command within a pipes exits unsuccessfully
+set -e # script terminates if any command exits with non-zero status
+set -u # terminates if any variable is unset
+set -o pipefail # terminates if command within a pipes exits unsuccessfully
 #Tabulate results of SNaQ analyses
 #Utilize: bash summarizeSNaQres.sh one_or_more_filenames
 echo -e "analysis,h,CPUtime,Nruns,Nfail,fabs,frel,xtabs,xrel,seed,under3460,under3450,under3440\n" > SNaQSummary.csv #add column titles to .csv file
@@ -22,7 +22,7 @@ do
 	u3460=0 #set number of scores under 3460 to 0
 	u3450=0 #set number of scores under 3450 to 0
 	u3440=0 #set number of scores under 3440 to 0
-	for score in $loglik #Define individual values in $loglike as variable $score
+        for score in $loglik #Define individual values within $loglik as variable $score
         do
                 if [ $score -ge 3460 ] #set values of $u3460, $u3450, $u3440 with nested if statement
                 then
@@ -30,17 +30,17 @@ do
                 else
                         if [ $score -ge 3450 ]
                         then
-                         ((u3460++))
+                         ((++u3460))
                         else
                                 if [ $score -ge 3440 ]
                                 then
                                  ((++u3450))
                                 else
                                  ((++u3440))
-                fi
-                        fi
                                 fi
-	done
+                        fi
+                fi
+        done
 	echo -e "$Root","$Hmax","$Time","$Nruns","$Nfail","$fabs","$frel","$xtabs","$xrel","$seed","$u3460","$u3450","$u3440" >> SNaQSummary.csv #Append values to csv file
 done
 

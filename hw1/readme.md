@@ -68,6 +68,9 @@ Prerequisites
 
 /bin/bash
 
+GNU Unix assumed
+#BSD users will have different arguements to enable extended regular expressions
+
 *.log files can be found at /home/sparks/coursework/hw1-snaqTimeTests/log/    
 *.out files found in /home/sparks/coursework/hw1-snaqTimeTests/out/    
 
@@ -99,6 +102,7 @@ summarizeSNaQfiles.sh
 #$outfile= location of *.out file
 #Time= CPUtime value from outfile
 #grep -P '\d+' = extended regex finding numbers with one or more digits
+## -P enables extended regex for GNU grep; -E for BSD grep
 #echo= print target
 ------
 Purpose
@@ -128,4 +132,74 @@ K. William Sparks
 **Exercise 3**
 ==========
 
-Completion Pending
+------------
+Prerequisites
+------------
+
+bin/bash
+
+GNU Unix assumed
+#BSD users will have different arguements to enable extended regular expressions
+
+*.log files can be found at /home/sparks/coursework/hw1-snaqTimeTests/log/
+*.out files found in /home/sparks/coursework/hw1-snaqTimeTests/out/
+
+
+--------
+Built With
+---------
+
+Nano
+
+----
+Code
+----
+
+#logfile= location of *.logfile
+#$Root= rootname of logfile
+#$Hmax= hmax value from logfile
+#$outfile= location of *.out file
+#$Time= CPUtime value from outfile
+#$Nruns= number of runs from logfile
+#$Nfail= number of failed attempts from logfile
+#$fabs= ftolAbs tolerance parameter from logfile
+#$frel= ftolRel tolerance parameter from logfile
+#$xtabs= xtolAbs tolerance parameter from logfile
+#$xrel= xtolRel tolerance parameter from logfile
+#$seed= main seed value from logfile
+#$loglik= variable containing values of all network scores within a single logfile
+##$score= variable containing a single network score value from $loglike; used to run each network score individually through if statement 
+#$u3460= number of network scores under 3460 for a given logfile
+#$u3450= number of network scores under 3450 for a given logfile
+#$u3440= number of network score under 3440 for a given logfile
+#sed -rn 's/pattern/replacement/p'= search for <pattern> and replace with <replacement>; print if match is found
+## -r enables the use of extended regex for GNU sed; -E for BSD sed
+#echo= print target
+------
+Purpose
+------
+
+#Find file rootname, hmax, elapsed time, number of runs, number of failed attempts, main seed, tolerance parameters, and network score (loglikelihood) values and display results as table in .csv file
+
+----------------
+Original Location
+----------------
+
+/home/sparks/coursedata/hw1-snaqTimeTests
+
+
+------
+Execute
+------
+
+bash summarizeSNaQfilesExtend.sh
+
+------
+Authors
+------
+K. William Sparks
+
+--------
+Original Date Created
+-------
+2016-10-08

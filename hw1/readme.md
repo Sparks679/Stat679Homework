@@ -161,7 +161,7 @@ Code
 #$outfile= location of *.out file
 #$Time= CPUtime value from outfile
 #$Nruns= number of runs from logfile
-#$Nfail= number of failed attempts from logfile
+#$Nfail= number of failed proposals from logfile
 #$fabs= ftolAbs tolerance parameter from logfile
 #$frel= ftolRel tolerance parameter from logfile
 #$xtabs= xtolAbs tolerance parameter from logfile

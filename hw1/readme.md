@@ -37,8 +37,13 @@ normalizefilenames.sh
         mv log/timetest${i}_snaq.log log/timetest0${i}_snaq.log #change name and delete original file with mv 
         mv out/timetest${i}_snaq.out out/timetest0${i}_snaq.out
     done
+```
+---------------------
+Commands and Variables
+---------------------
 
 mv# moves file contents and deletes original
+
 -----
 Purpose
 -----
@@ -66,7 +71,7 @@ K. William Sparks
 Prerequisites
 ------------
 
-/bin/bash
+#!/bin/bash
 
 GNU Unix assumed
 #BSD users will have different arguements to enable extended regular expressions
@@ -96,6 +101,11 @@ summarizeSNaQres.sh
         Time="$(grep Elapsed "$outfile" | grep -Po '[d+\.\d+')" #Define hmax as result of grep pipeline; grep -o for digits and special character
         echo -e "$Root","$Hmax","$Time" >> SNaQSummary.csv #Append rootname, hmax, elapsed time values to .csv file
     done
+```
+
+---------------------
+Commands and Variables
+---------------------
 
 #$Root= rootname of logfile
 #$Hmax= hmax value fro logfile
@@ -104,6 +114,7 @@ summarizeSNaQres.sh
 #grep -P '\d+' = extended regex finding numbers with one or more digits
 ## -P enables extended regex for GNU grep; -E for BSD grep
 #echo= print target
+
 ------
 Purpose
 ------
@@ -136,7 +147,7 @@ K. William Sparks
 Prerequisites
 ------------
 
-bin/bash
+#!/bin/bash
 
 GNU Unix assumed
 #BSD users will have different arguements to enable extended regular expressions
@@ -158,47 +169,50 @@ Code
 summarizeSNaQresExtend.sh
 
 ```bash
-#!/bin/bash
-echo -e "analysis,h,CPUtime,Nruns,Nfail,fabs,frel,xtabs,xrel,seed,under3460,under3450,under3440\n" > SNaQSummary.csv #add column titles to .cs$
-for logfile in log/*.log
-do
-        Root=$(basename -s .log $logfile) #Define rootname as variable $Root
-        Hmax=$(sed -rn 's/hmax = ([0-9])+./\1/p' $logfile) #Define hmax value as variable $Hmax
-        outfile=out/$Root.out #Define outfile location based on $Root
-        Time=$(sed -rn 's/Elapsed time: ([0-9]+\.[0-9]+) [a-z].+/\1/p' $outfile) #Define Elapsed time value as variable $Time
-        Nruns=$(sed -rn 's/.+ ([0-9]+) runs .+/\1/p' $logfile) #Define number of runs as variable $Nruns
-        Nfail=$(sed -rn 's/.* failed proposals = ([0-9]+).+/\1/p' $logfile) #Define number of failed proposals as variable $Nfail
-        fabs=$(sed -rn 's/.+ ftolAbs=([0-9]+\..*[0-9])./\1/p' $logfile) #Define ftolAbs value as variable $fabs
-        frel=$(sed -rn 's/.+ ftolRel=([0-9]+\.[0-9]+e*-*[0-9]*).+/\1/p' $logfile) #Define ftolRel value as variable $frel
-        xtabs=$(sed -rn 's/.+ xtolAbs=([0-9]+\..+[0-9]).+ .+/\1/p' $logfile) #Define xtolAbs value as variable $xtabs
-        xrel=$(sed -rn 's/.+ xtolRel=([0-9]+\..*[0-9]+).+/\1/p' $logfile) #Define xtolRel value as variable $xrel
-        seed=$(sed -rn 's/main seed ([0-9]+)/\1/p' $logfile) #Define main seed values as variable $seed
-        loglik=$(sed -rn 's/.+loglik=([0-9]+)\..*/\1/p' $logfile) #Define set of values in each $logfile as variable $loglik
-        u3460=0 #set number of scores under 3460 to 0
-        u3450=0 #set number of scores under 3450 to 0
-        u3440=0 #set number of scores under 3440 to 0
-        for score in $loglik #Define individual values within $loglik as variable $score
-        do
-                if [ $score -ge 3460 ] #set values of $u3460, $u3450, $u3440 with nested if statement
-                then
-                 :
-                else
-                        if [ $score -ge 3450 ]
-                        then
-                         ((++u3460))
-                        else
-                                if [ $score -ge 3440 ]
-                                then
-                                 ((++u3450))
-                                else
-                                 ((++u3440))
-                                fi
-                        fi
-                fi
-        done
-        echo -e "$Root","$Hmax","$Time","$Nruns","$Nfail","$fabs","$frel","$xtabs","$xrel","$seed","$u3460","$u3450","$u3440" >> SNaQSummary.c$
-done
+	echo -e "analysis,h,CPUtime,Nruns,Nfail,fabs,frel,xtabs,xrel,seed,under3460,under3450,under3440\n" > SNaQSummary.csv #add column titles to .cs$
+	for logfile in log/*.log
+	do
+		Root=$(basename -s .log $logfile) #Define rootname as variable $Root
+		Hmax=$(sed -rn 's/hmax = ([0-9])+./\1/p' $logfile) #Define hmax value as variable $Hmax
+		outfile=out/$Root.out #Define outfile location based on $Root
+		Time=$(sed -rn 's/Elapsed time: ([0-9]+\.[0-9]+) [a-z].+/\1/p' $outfile) #Define Elapsed time value as variable $Time
+		Nruns=$(sed -rn 's/.+ ([0-9]+) runs .+/\1/p' $logfile) #Define number of runs as variable $Nruns
+		Nfail=$(sed -rn 's/.* failed proposals = ([0-9]+).+/\1/p' $logfile) #Define number of failed proposals as variable $Nfail
+		fabs=$(sed -rn 's/.+ ftolAbs=([0-9]+\..*[0-9])./\1/p' $logfile) #Define ftolAbs value as variable $fabs
+		frel=$(sed -rn 's/.+ ftolRel=([0-9]+\.[0-9]+e*-*[0-9]*).+/\1/p' $logfile) #Define ftolRel value as variable $frel
+		xtabs=$(sed -rn 's/.+ xtolAbs=([0-9]+\..+[0-9]).+ .+/\1/p' $logfile) #Define xtolAbs value as variable $xtabs
+		xrel=$(sed -rn 's/.+ xtolRel=([0-9]+\..*[0-9]+).+/\1/p' $logfile) #Define xtolRel value as variable $xrel
+		seed=$(sed -rn 's/main seed ([0-9]+)/\1/p' $logfile) #Define main seed values as variable $seed
+		loglik=$(sed -rn 's/.+loglik=([0-9]+)\..*/\1/p' $logfile) #Define set of values in each $logfile as variable $loglik
+		u3460=0 #set number of scores under 3460 to 0
+		u3450=0 #set number of scores under 3450 to 0
+		u3440=0 #set number of scores under 3440 to 0
+		for score in $loglik #Define individual values within $loglik as variable $score
+		do
+			if [ $score -ge 3460 ] #set values of $u3460, $u3450, $u3440 with nested if statement
+			then
+			 :
+			else
+				if [ $score -ge 3450 ]
+				then
+				 ((++u3460))
+				else
+					if [ $score -ge 3440 ]
+					then
+					 ((++u3450))
+					else
+					 ((++u3440))
+					fi
+				fi
+			fi
+		done
+		echo -e "$Root","$Hmax","$Time","$Nruns","$Nfail","$fabs","$frel","$xtabs","$xrel","$seed","$u3460","$u3450","$u3440" >> SNaQSummary.c$
+	done
+```
 
+--------------------
+Commands and Variables
+--------------------
 
 #logfile= location of *.logfile
 #$Root= rootname of logfile

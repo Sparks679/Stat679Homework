@@ -120,7 +120,7 @@ Original Location
 Execute
 ------
 
-bash summarizeSNaQfiles.sh
+bash summarizeSNaQres.sh
 
 ------
 Authors
@@ -192,7 +192,7 @@ Original Location
 Execute
 ------
 
-bash summarizeSNaQfilesExtend.sh
+bash summarizeSNaQresExtend.sh
 
 ------
 Authors

@@ -107,13 +107,13 @@ summarizeSNaQres.sh
 Commands and Variables
 ---------------------
 
-#$Root= rootname of logfile
-#$Hmax= hmax value fro logfile
-#$outfile= location of *.out file
-#Time= CPUtime value from outfile
-#grep -P '\d+' = extended regex finding numbers with one or more digits
-## -P enables extended regex for GNU grep; -E for BSD grep
-#echo= print target
+-$Root= rootname of logfile
+-$Hmax= hmax value fro logfile
+-$outfile= location of *.out file
+-Time= CPUtime value from outfile
+-grep -P '\d+' = extended regex finding numbers with one or more digits
+-- -P enables extended regex for GNU grep; -E for BSD grep
+-echo= print target
 
 ------
 Purpose

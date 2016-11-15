@@ -20,6 +20,11 @@ All work produced by *K. William Sparks*
 **hw1/**
 -------
 
-Contains Shells Scripts used to complete Exercises 1-3 of Homework 1
+Contains Shell Scripts used to complete Exercises 1-3 of Homework 1
 
 
+------
+**hw2/**
+------
+
+Contains Python script used to complete Homework 2

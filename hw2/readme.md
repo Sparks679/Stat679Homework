@@ -41,11 +41,10 @@ import argparse #argument parser to create script arguments
 import sys
 import re #module for extended regular expressions
 parser = argparse.ArgumentParser() #define arguements for command line
-group = parser.add_argument_group('output arguments')
 parser.add_argument("temperaturefile", type=str, help="input file with temperature data")
 parser.add_argument("energyfile", type=str, help="input file with energy data")
-group.add_argument("-outfile", help="output file; defaults to sys.stdout")
-group.add_argument("-writeout", help="writing option for output file; defaults to 'a'")
+parser.add_argument("outfile", nargs='?', help="output file; defaults to sys.stdout")
+parser.add_argument("writeout", nargs='?', help="writing option for output file; defaults to 'a'")
 args = parser.parse_args()
 
 def Format_and_Merge(temperaturefile, energyfile, outfile = None, writeout = "a"):

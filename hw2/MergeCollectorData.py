@@ -5,12 +5,10 @@ import argparse #argument parser to create script arguments
 import sys
 import re #module for extended regular expressions
 parser = argparse.ArgumentParser() #define arguements for command line
-group = parser.add_argument_group('output arguments')
 parser.add_argument("temperaturefile", type=str, help="input file with temperature data")
 parser.add_argument("energyfile", type=str, help="input file with energy data")
-group.add_argument("-outfile", help="output file; must be in .csv format; defaults to sys.stdout")
-group.add_argument("-writeout", help="writing option for output file; a=append, w=overwrite; defaults to 'a'", 
-choices=('w', 'a'))
+parser.add_argument("outfile", nargs='?', help="output file; must be in .csv format; defaults to sys.stdout")
+parser.add_argument("writeout", nargs='?', help="writing option for output file; a=append, w=overwrite; defaults to 'a'", choices=('w', 'a'))
 args = parser.parse_args()
 
 def Format_and_Merge(temperaturefile, energyfile, outfile = None, writeout = "a"):
@@ -54,7 +52,7 @@ def Format_and_Merge(temperaturefile, energyfile, outfile = None, writeout = "a"
             fout.write(time) #write current $temptime string
             fout.write(",") # write comma to ensure that $energyWh appears in new column when $tempdate > $energydate becomes Ture
         elif tempdate > energydate: #$tempdate changes when this becomes True
-            fout.write(energyWh[t+1]) #write $energyWh string at index[t] to the existing line
+            fout.write(energyWh[t+1]) #write $energyWh string at index[t+1] to the existing line
             fout.write("/1000") #divides $energyWh string by 1000; division is not actually resolved since $energyWh is a string
             fout.write("\n") #writes a newline
             fout.write(time) #writes the first $temptimes string at the new $tempdate
